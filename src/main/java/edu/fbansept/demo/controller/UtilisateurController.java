@@ -49,4 +49,10 @@ public class UtilisateurController {
         utilisateurDao.save(utilisateur);
         return "OK";
     }
+
+    @DeleteMapping("/utilisateur/{id}")
+    public boolean supprimeUtilisateur(@PathVariable int id) {
+        utilisateurDao.deleteById(id);
+        return true;
+    }
 }
