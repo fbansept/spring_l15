@@ -3,19 +3,20 @@ package edu.fbansept.demo.model;
 import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Utilisateur {
-
+public class Pays {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String nom;
-    private String prenom;
 
-    @ManyToOne
-    private Pays pays;
+    @OneToMany(mappedBy = "pays")
+    private Set<Utilisateur> utilisateurs = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -33,19 +34,11 @@ public class Utilisateur {
         this.nom = nom;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public Set<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-//    public Pays getPays() {
-//        return pays;
-//    }
-
-    public void setPays(Pays pays) {
-        this.pays = pays;
+    public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
     }
 }
