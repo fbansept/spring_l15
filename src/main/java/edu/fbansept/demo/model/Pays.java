@@ -1,6 +1,9 @@
 package edu.fbansept.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.HashSet;
@@ -8,6 +11,8 @@ import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
 public class Pays {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,29 +21,7 @@ public class Pays {
     private String nom;
 
     @OneToMany(mappedBy = "pays")
+    @JsonIgnore
     private Set<Utilisateur> utilisateurs = new HashSet<>();
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Set<Utilisateur> getUtilisateurs() {
-        return utilisateurs;
-    }
-
-    public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
-        this.utilisateurs = utilisateurs;
-    }
 }
